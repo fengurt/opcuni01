@@ -1,5 +1,7 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import Navigation from "@/components/Navigation";
+import UniPageFooter from "@/components/UniPageFooter";
+import { mainMarketingHomePath } from "@/const";
 import { Link } from "wouter";
 import { trpc } from "@/lib/trpc";
 import {
@@ -57,7 +59,7 @@ export default function Courses() {
       <div className="fixed top-16 md:top-20 left-0 right-0 z-40 border-b border-white/10 bg-[oklch(0.13_0.02_250/0.92)] backdrop-blur-xl">
         <div className="container flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 py-3">
           <div className="flex flex-wrap items-center gap-2 text-[13px]">
-            <Link href="/">
+            <Link href={mainMarketingHomePath}>
               <span className="inline-flex items-center gap-1.5 text-white/75 hover:text-white transition-colors cursor-pointer">
                 <Home className="w-3.5 h-3.5" />
                 {tx({ zh: "返回官网", en: "Main site" }, language)}
@@ -90,7 +92,7 @@ export default function Courses() {
         <div className="absolute inset-0 pattern-overlay pointer-events-none opacity-30" />
         <div className="container relative z-10">
           <Reveal>
-            <Link href="/">
+            <Link href={mainMarketingHomePath}>
               <span className="btn-outline-gold mb-8 text-sm !py-2 !px-4 inline-flex items-center gap-2 cursor-pointer">
                 <Home className="w-4 h-4" />
                 {tx({ zh: "返回官网首页", en: "Main site home" }, language)}
@@ -583,7 +585,7 @@ export default function Courses() {
                 <Mail className="w-4 h-4" />
                 hi@opcglobal.ai
               </a>
-              <Link href="/">
+              <Link href={mainMarketingHomePath}>
                 <span className="btn-outline-gold inline-flex items-center gap-2 cursor-pointer">
                   <Home className="w-4 h-4" />
                   {tx({ zh: "返回官网", en: "Main site" }, language)}
@@ -594,34 +596,7 @@ export default function Courses() {
         </div>
       </section>
 
-      {/* UNI-only slim footer — avoids repeating OPC Global narrative from site Footer */}
-      <footer className="section-deep-blue border-t border-white/10">
-        <div className="container py-12 md:py-14 text-center max-w-2xl mx-auto">
-          <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-gold/80 mb-2">OPC UNI</p>
-          <p className="text-sm text-white/65 leading-relaxed mb-6">
-            {tx({
-              zh: "高等教育 AI 人才培养与入校交付 · 本页为高校决策专用，不含 OPC Global 组织与生态介绍。",
-              en: "Higher-ed AI talent programs and on-campus delivery. This hub is for institutional decisions—no duplicate OPC Global organizational storytelling.",
-            }, language)}
-          </p>
-          <div className="flex flex-wrap justify-center gap-6 text-sm">
-            <a href="mailto:hi@opcglobal.ai" className="text-white/70 hover:text-white inline-flex items-center gap-2">
-              <Mail className="w-4 h-4" />
-              hi@opcglobal.ai
-            </a>
-            <Link href="/uni">
-              <span className="text-gold/90 hover:text-gold cursor-pointer inline-flex items-center gap-1">
-                {tx({ zh: "UNI 培养方案全文", en: "Full UNI blueprint" }, language)}
-                <ArrowRight className="w-3.5 h-3.5" />
-              </span>
-            </Link>
-            <Link href="/">
-              <span className="text-white/50 hover:text-white/80 cursor-pointer">{tx({ zh: "进入官网", en: "Main website" }, language)}</span>
-            </Link>
-          </div>
-          <p className="text-[11px] text-white/35 mt-8">© {new Date().getFullYear()} OPC UNI</p>
-        </div>
-      </footer>
+      <UniPageFooter />
     </div>
   );
 }

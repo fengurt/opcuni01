@@ -1,6 +1,6 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
+import UniPageFooter from "@/components/UniPageFooter";
 import {
   ArrowRight,
   Check,
@@ -1017,7 +1017,7 @@ export default function Uni() {
         </div>
       </section>
 
-      <Footer />
+      <UniPageFooter />
     </div>
   );
 }
