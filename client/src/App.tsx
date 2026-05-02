@@ -22,11 +22,14 @@ import Courses from "./pages/Courses";
 import ManaEndless from "./pages/ManaEndless";
 import Apha from "./pages/Apha";
 
+const opcUniHomeFirst = import.meta.env.VITE_OPC_UNI_HOME === "true";
+
 function Router() {
   // make sure to consider if you need authentication for certain routes
   return (
     <Switch>
-      <Route path={"/"} component={Home} />
+      <Route path={"/"} component={opcUniHomeFirst ? Uni : Home} />
+      {opcUniHomeFirst ? <Route path={"/global"} component={Home} /> : null}
       <Route path={"/dashboard"} component={Dashboard} />
       <Route path={"/admin"} component={Admin} />
       <Route path={"/partner-apply"} component={PartnerApply} />
