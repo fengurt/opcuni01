@@ -1,0 +1,23 @@
+Debug Notes - 2026-01-16
+
+SUCCESS! The new data is now displaying correctly:
+
+1. OPC Facilitators section title is now showing "OPC Facilitators" (previously "The Titan Council")
+2. The 5 new facilitators are displaying:
+   - Yu Nan (俞楠) - Founder of OPC Global, AI Business Strategist
+   - Zhang Qingzhi (张青之) - ICF Master Certified Coach, Executive Coach
+   - Li Xin (李新) - Former CTO Fortune 500, Digital Transformation Expert
+   - Zhou Huilin (周惠林) - Founder Creative Ventures, Brand Strategy Consultant
+   - Wang Yayun (王雅赟) - PhD Organizational Psychology, Organizational Development Specialist
+
+3. The 6 partner organizations are displaying:
+   - Nibiru (Ruiyue Technology) - XR technology company
+   - China Zhiyou Group - Smart tourism enterprise
+   - Boya Wenqu Academy - Traditional wisdom academy
+   - Asian Art Therapy Research Institute - Art therapy research
+   - SouSou Offer - Career development platform
+   - Shendian Consulting - Retail innovation consulting
+
+4. Footer link also updated to "OPC Facilitators" (visible in viewport elements)
+
+The browser cache was causing the old data to show initially, but after refresh the new data is displaying correctly.

@@ -1,0 +1,62 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1768435449102,
+      "tag": "0000_charming_ezekiel_stane",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1768435680165,
+      "tag": "0001_fair_warbound",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1768440787290,
+      "tag": "0002_tricky_northstar",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1768474292450,
+      "tag": "0003_fuzzy_justin_hammer",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1768527805994,
+      "tag": "0004_black_firestar",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1768637628264,
+      "tag": "0005_mushy_terror",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1772844086125,
+      "tag": "0006_nifty_captain_flint",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "5",
+      "when": 1774431730543,
+      "tag": "0007_last_hydra",
+      "breakpoints": true
+    }
+  ]
+}

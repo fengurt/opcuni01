@@ -1,0 +1,21 @@
+CREATE TABLE `experts` (
+	`id` int AUTO_INCREMENT NOT NULL,
+	`nameEn` varchar(128) NOT NULL,
+	`nameZh` varchar(128),
+	`nameFr` varchar(128),
+	`nameJa` varchar(128),
+	`roleEn` varchar(128),
+	`roleZh` varchar(128),
+	`roleFr` varchar(128),
+	`roleJa` varchar(128),
+	`titleEn` varchar(255),
+	`titleZh` varchar(255),
+	`titleFr` varchar(255),
+	`titleJa` varchar(255),
+	`avatarUrl` varchar(512),
+	`isVisible` enum('visible','hidden') NOT NULL DEFAULT 'visible',
+	`displayOrder` int NOT NULL DEFAULT 0,
+	`createdAt` timestamp NOT NULL DEFAULT (now()),
+	`updatedAt` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,
+	CONSTRAINT `experts_id` PRIMARY KEY(`id`)
+);

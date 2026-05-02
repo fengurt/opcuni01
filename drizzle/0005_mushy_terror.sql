@@ -1,0 +1,22 @@
+CREATE TABLE `milestones` (
+	`id` int AUTO_INCREMENT NOT NULL,
+	`category` varchar(128) NOT NULL,
+	`sourceNameEn` varchar(255) NOT NULL,
+	`sourceNameZh` varchar(255),
+	`sourceNameFr` varchar(255),
+	`sourceNameJa` varchar(255),
+	`descriptionEn` text,
+	`descriptionZh` text,
+	`descriptionFr` text,
+	`descriptionJa` text,
+	`publishDate` varchar(32),
+	`sourceType` varchar(128),
+	`url` varchar(1024),
+	`country` varchar(64),
+	`year` int,
+	`isVisible` enum('visible','hidden') NOT NULL DEFAULT 'visible',
+	`displayOrder` int NOT NULL DEFAULT 0,
+	`createdAt` timestamp NOT NULL DEFAULT (now()),
+	`updatedAt` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,
+	CONSTRAINT `milestones_id` PRIMARY KEY(`id`)
+);
