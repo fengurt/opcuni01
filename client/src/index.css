@@ -555,6 +555,220 @@
   .gradient-fade-top {
     background: linear-gradient(to top, transparent, oklch(1 0 0));
   }
+
+  /* ── OPC UNI solutions page (scoped under .uni-page) ── */
+  .uni-page-hero-shell {
+    position: relative;
+    min-height: min(92vh, 920px);
+    display: flex;
+    align-items: center;
+    padding-top: 4.5rem;
+    padding-bottom: 3rem;
+    overflow: hidden;
+    background-color: oklch(0.1 0.03 264);
+  }
+
+  .uni-page-hero-shell::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 100% 80% at 10% 15%, oklch(0.38 0.12 264 / 0.45), transparent 58%),
+      radial-gradient(ellipse 80% 60% at 92% 72%, oklch(0.62 0.14 75 / 0.16), transparent 52%),
+      radial-gradient(ellipse 55% 45% at 55% 100%, oklch(0.28 0.08 285 / 0.35), transparent 50%);
+    pointer-events: none;
+  }
+
+  .uni-page-hero-shell::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(oklch(0.62 0.1 75 / 0.055) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: linear-gradient(to bottom, black 35%, transparent 92%);
+    pointer-events: none;
+  }
+
+  .uni-glass-tile {
+    position: relative;
+    border-radius: 1.125rem;
+    padding: 1.375rem 1.5rem 1.25rem;
+    background: linear-gradient(155deg, oklch(1 0 0 / 0.1), oklch(1 0 0 / 0.025));
+    border: 1px solid oklch(1 0 0 / 0.16);
+    box-shadow:
+      0 0 0 1px oklch(0 0 0 / 0.22) inset,
+      0 28px 90px oklch(0 0 0 / 0.38);
+    backdrop-filter: blur(22px);
+    transition: border-color 0.45s ease, transform 0.45s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.45s ease;
+  }
+
+  .uni-glass-tile:hover {
+    border-color: oklch(0.62 0.1 75 / 0.38);
+    transform: translateY(-3px);
+    box-shadow:
+      0 0 0 1px oklch(0.62 0.1 75 / 0.12) inset,
+      0 36px 100px oklch(0 0 0 / 0.42);
+  }
+
+  .uni-subnav {
+    position: sticky;
+    top: 4rem;
+    z-index: 35;
+    border-bottom: 1px solid oklch(0.92 0.004 250 / 0.85);
+    background: oklch(0.99 0.004 250 / 0.82);
+    backdrop-filter: blur(16px);
+  }
+
+  @media (min-width: 768px) {
+    .uni-subnav {
+      top: 5rem;
+    }
+  }
+
+  .uni-subnav a {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.45rem 0.95rem;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: oklch(0.38 0.03 250);
+    border-radius: 9999px;
+    border: 1px solid oklch(0.9 0.004 250);
+    background: oklch(1 0 0 / 0.65);
+    transition: color 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+    min-height: 0;
+    min-width: 0;
+  }
+
+  .uni-subnav a:hover {
+    color: oklch(0.15 0.03 250);
+    border-color: oklch(0.62 0.1 75 / 0.35);
+    background: oklch(0.62 0.1 75 / 0.06);
+  }
+
+  .uni-pillar-card {
+    position: relative;
+    height: 100%;
+    padding: 2rem 1.75rem 2.125rem;
+    border-radius: 1.125rem;
+    background: linear-gradient(180deg, oklch(1 0 0), oklch(0.995 0.004 250));
+    border: 1px solid oklch(0.93 0.004 90);
+    box-shadow: 0 20px 60px oklch(0.15 0.03 250 / 0.05);
+    overflow: hidden;
+    transition: transform 0.45s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.45s ease, border-color 0.45s ease;
+  }
+
+  .uni-pillar-card::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 3px;
+    background: linear-gradient(90deg, oklch(0.62 0.1 75 / 0), oklch(0.62 0.12 75), oklch(0.62 0.1 75 / 0));
+    opacity: 0.85;
+  }
+
+  .uni-pillar-card:hover {
+    transform: translateY(-4px);
+    border-color: oklch(0.62 0.1 75 / 0.22);
+    box-shadow: 0 28px 72px oklch(0.15 0.03 250 / 0.09);
+  }
+
+  .uni-icon-ring {
+    width: 3.75rem;
+    height: 3.75rem;
+    border-radius: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1.5rem;
+    background: radial-gradient(circle at 30% 25%, oklch(0.62 0.12 75 / 0.2), oklch(0.62 0.08 75 / 0.06));
+    border: 1px solid oklch(0.62 0.1 75 / 0.22);
+    box-shadow: 0 12px 32px oklch(0.62 0.1 75 / 0.08);
+  }
+
+  .uni-stat-board {
+    background: linear-gradient(180deg, oklch(0.985 0.005 250), oklch(0.975 0.006 250));
+    border-block: 1px solid oklch(0.92 0.004 250);
+  }
+
+  .uni-stat-board .uni-stat-num {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    background: linear-gradient(135deg, oklch(0.2 0.04 250), oklch(0.62 0.12 75));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .uni-track-card {
+    position: relative;
+    border-radius: 1rem;
+    padding: 1.5rem 1.5rem 1.5rem 1.25rem;
+    border: 1px solid oklch(0.93 0.004 90);
+    background: linear-gradient(145deg, oklch(1 0 0), oklch(0.995 0.004 250));
+    box-shadow: 0 12px 40px oklch(0.15 0.03 250 / 0.04);
+    transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .uni-track-card:hover {
+    border-color: oklch(0.62 0.1 75 / 0.28);
+    box-shadow: 0 20px 56px oklch(0.15 0.03 250 / 0.08);
+    transform: translateY(-2px);
+  }
+
+  .uni-aurora {
+    position: relative;
+    overflow: hidden;
+    background-color: oklch(0.11 0.03 270);
+  }
+
+  .uni-aurora::before {
+    content: "";
+    position: absolute;
+    inset: -20% -10%;
+    background:
+      radial-gradient(ellipse 50% 45% at 20% 40%, oklch(0.55 0.18 290 / 0.18), transparent 55%),
+      radial-gradient(ellipse 45% 40% at 85% 65%, oklch(0.62 0.14 75 / 0.12), transparent 50%),
+      radial-gradient(ellipse 60% 50% at 50% 110%, oklch(0.35 0.1 250 / 0.25), transparent 55%);
+    pointer-events: none;
+  }
+
+  .uni-aurora-card {
+    position: relative;
+    z-index: 1;
+    border-radius: 1rem;
+    padding: 1.75rem 1.5rem;
+    background: linear-gradient(165deg, oklch(1 0 0 / 0.07), oklch(1 0 0 / 0.02));
+    border: 1px solid oklch(1 0 0 / 0.12);
+    backdrop-filter: blur(18px);
+    transition: border-color 0.35s ease, transform 0.35s ease;
+  }
+
+  .uni-aurora-card:hover {
+    border-color: oklch(0.62 0.1 75 / 0.35);
+    transform: translateY(-2px);
+  }
+
+  .uni-cta-panel {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, oklch(0.11 0.03 264), oklch(0.13 0.035 250));
+  }
+
+  .uni-cta-panel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 120%, oklch(0.62 0.14 75 / 0.2), transparent 55%);
+    pointer-events: none;
+  }
 }
 
 /* ═══════════════════════════════════════════
