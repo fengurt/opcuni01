@@ -192,16 +192,37 @@ interface SectionHeadingProps {
 export function SectionHeading({ label, title, subtitle, align = "center", dark = false }: SectionHeadingProps) {
   return (
     <Reveal className={`mb-10 md:mb-14 ${align === "center" ? "text-center" : ""}`}>
-      <h2 className={dark ? "text-white" : "text-foreground"}>
-        {title}
-      </h2>
-      {subtitle && (
-        <p className={`mt-3 max-w-xl text-base leading-relaxed ${
-          align === "center" ? "mx-auto" : ""
-        } ${dark ? "text-white/60" : "text-muted-foreground"}`}>
+      {label ? (
+        <p
+          className={`text-[10px] sm:text-[11px] font-semibold tracking-[0.26em] uppercase mb-4 font-sans ${
+            align === "center" ? "flex justify-center" : ""
+          } ${dark ? "text-gold/85" : "text-gold"}`}
+        >
+          <span className="inline-flex items-center gap-3">
+            <span
+              className={`h-px w-6 sm:w-10 shrink-0 bg-gradient-to-r ${dark ? "from-white/25 to-gold/70" : "from-transparent to-gold"}`}
+              aria-hidden
+            />
+            {label}
+            {align === "center" ? (
+              <span
+                className={`h-px w-6 sm:w-10 shrink-0 bg-gradient-to-l ${dark ? "from-white/25 to-gold/70" : "from-transparent to-gold"}`}
+                aria-hidden
+              />
+            ) : null}
+          </span>
+        </p>
+      ) : null}
+      <h2 className={dark ? "text-white" : "text-foreground"}>{title}</h2>
+      {subtitle ? (
+        <p
+          className={`mt-4 max-w-3xl text-base md:text-[1.05rem] leading-relaxed ${
+            align === "center" ? "mx-auto" : ""
+          } ${dark ? "text-white/65" : "text-muted-foreground"}`}
+        >
           {subtitle}
         </p>
-      )}
+      ) : null}
     </Reveal>
   );
 }

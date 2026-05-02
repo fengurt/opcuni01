@@ -16,8 +16,10 @@ import {
   BookOpen,
   Handshake,
   Briefcase,
+  Rocket,
+  Sparkles,
 } from "lucide-react";
-import { Reveal, SectionHeading } from "@/components/motion";
+import { Reveal, SectionHeading, ScrollIndicator } from "@/components/motion";
 
 type Lang = "en" | "zh" | "fr" | "ja";
 const tx = (m: Partial<Record<Lang, string>>, lang: string) => m[lang as Lang] || m.en || "";
@@ -30,10 +32,10 @@ function CourseTable({
   language: string;
 }) {
   return (
-    <div className="overflow-x-auto rounded-xl border border-border/40">
+    <div className="overflow-x-auto rounded-xl border border-border/50 shadow-[0_12px_40px_oklch(0.15_0.03_250/0.04)]">
       <table className="w-full text-sm">
-        <thead className="bg-muted/50">
-          <tr className="text-left border-b border-border/40">
+        <thead className="bg-gradient-to-r from-muted/80 to-muted/40">
+          <tr className="text-left border-b border-border/50">
             <th className="p-3 font-semibold text-foreground">{tx({ zh: "阶段", en: "Phase" }, language)}</th>
             <th className="p-3 font-semibold text-foreground">{tx({ zh: "课程名称", en: "Course" }, language)}</th>
             <th className="p-3 font-semibold text-foreground whitespace-nowrap">{tx({ zh: "中国学分", en: "CN Cr." }, language)}</th>
@@ -64,64 +66,143 @@ export default function Uni() {
   const phaseAdv = { zh: "进阶阶段", en: "Advanced" };
   const phasePrac = { zh: "实战阶段", en: "Capstone & Practice" };
 
+  const quickNav = [
+    { href: "#offerings", zh: "方案概览", en: "Overview" },
+    { href: "#three-pillars", zh: "三大支柱", en: "Pillars" },
+    { href: "#four-tracks", zh: "培养体系", en: "Programs" },
+    { href: "#unicorn", zh: "独角兽", en: "Ventures" },
+    { href: "#cooperation", zh: "合作流程", en: "Process" },
+  ] as const;
+
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className="uni-page min-h-screen flex flex-col bg-background">
       <Navigation />
 
       {/* ═══ HERO ═══ */}
-      <section className="relative min-h-[80vh] flex items-center section-deep-blue overflow-hidden">
-        <div className="absolute inset-0 pattern-overlay pointer-events-none opacity-30" />
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
-        <div className="container relative z-10 text-center py-24 md:py-32">
-          <Reveal>
-            <span className="badge-official mb-8 inline-block">OPC UNI</span>
-          </Reveal>
-          <Reveal delay={0.2}>
-            <h1 className="text-white max-w-4xl mx-auto mb-6">
-              {tx({
-                zh: "AI 时代的高等教育变革伙伴",
-                en: "Your Strategic Partner for AI-Era Higher Education Transformation",
-              }, language)}
-            </h1>
-          </Reveal>
-          <Reveal delay={0.3}>
-            <p className="text-white/80 text-base md:text-lg max-w-3xl mx-auto mb-4 leading-relaxed">
-              {tx({
-                zh: "学术共创 · 专业共建 · OPC 就业创业辅导",
-                en: "Academic Co-Creation · Joint Programs · OPC Career & Entrepreneurship Support",
-              }, language)}
-            </p>
-          </Reveal>
-          <Reveal delay={0.4}>
-            <p className="text-white/70 text-sm md:text-base max-w-2xl mx-auto mb-8 leading-relaxed">
-              {tx({
-                zh: "依据《OPC Global — UNI AI 人才培养方案》，四大方向覆盖研发、工程、行业应用与治理，支持全球学分对接与理实一体化交付。",
-                en: "Built on the OPC Global UNI AI Talent Development Blueprint: four tracks covering R&D, engineering, industry applications, and governance—with global credit alignment and integrated theory-practice delivery.",
-              }, language)}
-            </p>
-          </Reveal>
-          <Reveal delay={0.5}>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="mailto:hi@opcglobal.ai">
-                <button className="btn-gold">
-                  <span className="flex items-center gap-2">
-                    {tx({ zh: "预约院长洽谈", en: "Schedule Dean Consultation" }, language)}
-                    <ArrowRight className="w-4 h-4" />
-                  </span>
-                </button>
+      <section className="uni-page-hero-shell section-deep-blue relative">
+        <div className="container relative z-10 grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          <div className="lg:col-span-7 text-center lg:text-left">
+            <Reveal>
+              <span className="badge-official mb-6 lg:mb-8 inline-block border-white/20 text-gold">
+                OPC UNI · {tx({ zh: "高校与创投", en: "Higher Ed & Ventures" }, language)}
+              </span>
+            </Reveal>
+            <Reveal delay={0.12}>
+              <h1 className="text-white text-balance max-w-[22ch] mx-auto lg:mx-0 mb-6">
+                {tx({
+                  zh: "面向高校的 AI 人才培养与独角兽孵化",
+                  en: "AI Talent Programs for Universities — and Paths to Unicorn Caliber Ventures",
+                }, language)}
+              </h1>
+            </Reveal>
+            <Reveal delay={0.2}>
+              <p className="text-white/85 text-lg md:text-xl max-w-2xl mx-auto lg:mx-0 mb-4 leading-snug font-medium tracking-tight">
+                {tx({
+                  zh: "学术共创 · 专业共建 · OPC 就业创业辅导",
+                  en: "Academic Co-Creation · Joint Programs · OPC Career & Entrepreneurship Support",
+                }, language)}
+              </p>
+            </Reveal>
+            <Reveal delay={0.28}>
+              <p className="text-white/60 text-sm md:text-base max-w-xl mx-auto lg:mx-0 mb-10 leading-relaxed">
+                {tx({
+                  zh: "一套页面讲清两件事：高校侧可嵌入学分的人才培养方案，以及师生创业项目进入 OPC 生态与独角兽加速的全链路。全球学分对照 · 理实一体实训 · 订单与资本协同。",
+                  en: "One narrative, two outcomes: credit-bearing AI talent tracks you can embed on campus, and venture pathways into OPC\u2019s order network, incubation, and investor fabric—credits, labs, and capital aligned.",
+                }, language)}
+              </p>
+            </Reveal>
+            <Reveal delay={0.36}>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                <a href="mailto:hi@opcglobal.ai">
+                  <button type="button" className="btn-gold w-full sm:w-auto justify-center">
+                    <span className="flex items-center justify-center gap-2">
+                      {tx({ zh: "预约院校方案会谈", en: "Book an Institutional Session" }, language)}
+                      <ArrowRight className="w-4 h-4" />
+                    </span>
+                  </button>
+                </a>
+                <a href="#unicorn">
+                  <button type="button" className="btn-outline-gold w-full sm:w-auto justify-center border-white/35 text-white hover:bg-white/10">
+                    {tx({ zh: "独角兽孵化路径", en: "Venture & Incubation" }, language)}
+                  </button>
+                </a>
+              </div>
+            </Reveal>
+          </div>
+
+          <div id="offerings" className="lg:col-span-5 flex flex-col gap-4 scroll-mt-36">
+            <Reveal delay={0.18}>
+              <div className="uni-glass-tile text-left">
+                <div className="flex items-start gap-4">
+                  <div className="w-11 h-11 rounded-xl bg-gold/15 border border-gold/25 flex items-center justify-center shrink-0">
+                    <GraduationCap className="w-5 h-5 text-gold" />
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-semibold tracking-[0.2em] uppercase text-gold/90 mb-1">
+                      {tx({ zh: "高校解决方案", en: "For Universities" }, language)}
+                    </p>
+                    <h3 className="text-white text-lg font-medium mb-2" style={{ fontFamily: "var(--font-heading)" }}>
+                      {tx({ zh: "AI 学分型培养与入校交付", en: "Credit-Based AI Tracks & Campus Delivery" }, language)}
+                    </h3>
+                    <p className="text-white/55 text-sm leading-relaxed">
+                      {tx({
+                        zh: "四类研发 / 工程 / 应用 / 治理方向；微专业、课替与联合培养；双师、实训验收与全球学分矩阵。",
+                        en: "Four tracks—R&D, engineering, applications, governance—with micro-majors, swaps, joint degrees, co-teaching, and credit mapping.",
+                      }, language)}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+            <Reveal delay={0.26}>
+              <div className="uni-glass-tile text-left">
+                <div className="flex items-start gap-4">
+                  <div className="w-11 h-11 rounded-xl bg-white/10 border border-white/15 flex items-center justify-center shrink-0">
+                    <Rocket className="w-5 h-5 text-gold" />
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-semibold tracking-[0.2em] uppercase text-gold/90 mb-1">
+                      {tx({ zh: "独角兽与创投", en: "Ventures" }, language)}
+                    </p>
+                    <h3 className="text-white text-lg font-medium mb-2" style={{ fontFamily: "var(--font-heading)" }}>
+                      {tx({ zh: "从实验室到订单与资本", en: "From Lab to Orders & Capital" }, language)}
+                    </h3>
+                    <p className="text-white/55 text-sm leading-relaxed">
+                      {tx({
+                        zh: "战略定位、液态团队、全球订单与早期投资协同；师生创业项目进入 OPC 独角兽孵化管线。",
+                        en: "Positioning, liquid teams, global demand, and investor syndication—campus spinouts plug into OPC\u2019s unicorn acceleration stack.",
+                      }, language)}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+            <Reveal delay={0.34}>
+              <a
+                href="#three-pillars"
+                className="flex items-center justify-center gap-2 text-[11px] font-semibold tracking-[0.18em] uppercase text-white/45 hover:text-gold/90 transition-colors py-2"
+              >
+                <Sparkles className="w-3.5 h-3.5" />
+                {tx({ zh: "了解合作支柱", en: "Explore the pillars" }, language)}
               </a>
-              <a href="#four-tracks">
-                <button className="btn-outline-gold">
-                  <span>{tx({ zh: "四大培养方向", en: "Four Talent Tracks" }, language)}</span>
-                </button>
-              </a>
-            </div>
-          </Reveal>
+            </Reveal>
+          </div>
         </div>
+        <ScrollIndicator />
       </section>
 
+      <nav className="uni-subnav" aria-label={tx({ zh: "本页章节", en: "On this page" }, language)}>
+        <div className="container flex flex-wrap gap-2 py-3.5 justify-center md:justify-start">
+          {quickNav.map((item) => (
+            <a key={item.href} href={item.href}>
+              {tx({ zh: item.zh, en: item.en }, language)}
+            </a>
+          ))}
+        </div>
+      </nav>
+
       {/* ═══ THREE PILLARS FOR UNIVERSITIES ═══ */}
-      <section id="three-pillars" className="section-padding bg-background scroll-mt-28">
+      <section id="three-pillars" className="section-padding bg-background scroll-mt-32">
         <div className="container">
           <SectionHeading
             label={tx({ zh: "高校合作", en: "University Partnership" }, language)}
@@ -159,12 +240,14 @@ export default function Uni() {
               },
             ].map((item, i) => (
               <Reveal key={i} delay={i * 0.1}>
-                <div className="card-premium h-full text-center p-8">
-                  <div className="w-16 h-16 rounded-2xl bg-gold/10 flex items-center justify-center mx-auto mb-6">
-                    <item.icon className="w-8 h-8 text-gold" />
+                <div className="uni-pillar-card h-full text-center">
+                  <div className="uni-icon-ring">
+                    <item.icon className="w-8 h-8 text-gold" strokeWidth={1.35} />
                   </div>
-                  <h3 className="text-xl font-semibold text-foreground mb-3">{tx(item.title, language)}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{tx(item.desc, language)}</p>
+                  <h3 className="text-xl font-semibold text-foreground mb-3" style={{ fontFamily: "var(--font-heading)" }}>
+                    {tx(item.title, language)}
+                  </h3>
+                  <p className="text-muted-foreground text-[15px] leading-relaxed">{tx(item.desc, language)}</p>
                 </div>
               </Reveal>
             ))}
@@ -173,9 +256,9 @@ export default function Uni() {
       </section>
 
       {/* ═══ STATS ═══ */}
-      <section className="section-padding-sm border-y border-border/30 bg-[oklch(0.98_0.003_250)]">
+      <section className="section-padding-sm uni-stat-board">
         <div className="container">
-          <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-y-10 gap-x-6 md:gap-12 max-w-5xl mx-auto items-start">
             {[
               { n: "50+", l: { zh: "合作高校", en: "Partner Universities" } },
               { n: "20+", l: { zh: "国家/地区", en: "Countries" } },
@@ -183,9 +266,15 @@ export default function Uni() {
               { n: "4", l: { zh: "AI 培养方向", en: "AI Tracks" } },
             ].map((s, i) => (
               <Reveal key={i} delay={i * 0.08}>
-                <div className="text-center">
-                  <div className="stat-number">{s.n}</div>
-                  <p className="text-sm text-muted-foreground mt-1">{tx(s.l, language)}</p>
+                <div className="text-center md:text-left relative">
+                  {i > 0 ? (
+                    <span
+                      className="hidden md:block absolute -left-6 top-3 h-12 w-px bg-gradient-to-b from-transparent via-border to-transparent"
+                      aria-hidden
+                    />
+                  ) : null}
+                  <div className="uni-stat-num mb-2">{s.n}</div>
+                  <p className="text-xs font-semibold tracking-[0.14em] uppercase text-muted-foreground">{tx(s.l, language)}</p>
                 </div>
               </Reveal>
             ))}
@@ -194,7 +283,7 @@ export default function Uni() {
       </section>
 
       {/* ═══ FOUR TRACKS OVERVIEW ═══ */}
-      <section id="four-tracks" className="section-padding bg-background">
+      <section id="four-tracks" className="section-padding bg-background scroll-mt-32">
         <div className="container max-w-5xl">
           <SectionHeading
             label={tx({ zh: "培养体系总览", en: "Program Overview" }, language)}
@@ -248,17 +337,23 @@ export default function Uni() {
               },
             ].map((t, i) => (
               <Reveal key={t.id} delay={i * 0.08}>
-                <a href={`#${t.id}`} className="block h-full">
-                  <div className="card-premium h-full p-6 hover:border-gold/30 transition-colors">
+                <a href={`#${t.id}`} className="group block h-full">
+                  <div className="uni-track-card h-full pl-5 border-l-[3px] border-l-gold/35 group-hover:border-l-gold/70">
                     <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 rounded-xl bg-gold/10 flex items-center justify-center shrink-0">
-                        <t.icon className="w-6 h-6 text-gold" />
+                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-gold/15 to-gold/5 border border-gold/20 flex items-center justify-center shrink-0 shadow-sm">
+                        <t.icon className="w-6 h-6 text-gold" strokeWidth={1.35} />
                       </div>
-                      <div>
-                        <h3 className="text-lg font-semibold text-foreground mb-1">{tx(t.title, language)}</h3>
-                        <p className="text-xs text-gold/80 mb-2">{tx(t.credits, language)}</p>
+                      <div className="min-w-0 flex-1">
+                        <p className="text-[10px] font-bold text-gold/70 tracking-widest uppercase mb-1">
+                          {tx({ zh: "培养方向", en: "Track" }, language)} · {String(i + 1).padStart(2, "0")}
+                        </p>
+                        <h3 className="text-lg font-semibold text-foreground mb-1" style={{ fontFamily: "var(--font-heading)" }}>
+                          {tx(t.title, language)}
+                        </h3>
+                        <p className="text-xs text-gold/85 font-medium mb-2">{tx(t.credits, language)}</p>
                         <p className="text-sm text-muted-foreground leading-relaxed">{tx(t.core, language)}</p>
                       </div>
+                      <ArrowRight className="w-4 h-4 text-gold/40 group-hover:text-gold shrink-0 mt-2 transition-colors" />
                     </div>
                   </div>
                 </a>
@@ -880,7 +975,7 @@ export default function Uni() {
       </section>
 
       {/* ═══ COOPERATION ═══ */}
-      <section id="cooperation" className="section-padding section-deep-blue relative overflow-hidden scroll-mt-24">
+      <section id="cooperation" className="section-padding section-deep-blue relative overflow-hidden scroll-mt-32">
         <div className="absolute inset-0 pattern-overlay pointer-events-none opacity-30" />
         <div className="container relative z-10">
           <SectionHeading
@@ -937,39 +1032,52 @@ export default function Uni() {
       </section>
 
       {/* ═══ UNICORN ═══ */}
-      <section className="section-padding bg-background">
-        <div className="container max-w-4xl">
+      <section id="unicorn" className="section-padding uni-aurora relative scroll-mt-32">
+        <div className="pattern-overlay absolute inset-0 opacity-[0.12] pointer-events-none z-[1]" aria-hidden />
+        <div className="container relative z-10 max-w-5xl">
           <SectionHeading
             label={tx({ zh: "独角兽孵化", en: "Unicorn Incubation" }, language)}
-            title={tx({ zh: "独角兽孵化服务", en: "Unicorn Incubation Services" }, language)}
+            title={tx({ zh: "从校园创新到独角兽管线", en: "From Campus Innovation to Unicorn-Scale Pipelines" }, language)}
             subtitle={tx({
-              zh: "为有潜力的创业项目提供全链路支持",
-              en: "Full-chain support for high-potential ventures",
+              zh: "与高校人才培养并行：筛选高潜力课题与团队，对接 OPC 全球订单、产业导师与资本网络，形成可验证的增长飞轮。",
+              en: "Parallel to degree programs: we surface high-conviction labs and teams, then plug them into OPC demand, operator mentors, and capital—designed as a measurable growth loop.",
             }, language)}
+            dark
           />
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 gap-5 lg:gap-6">
             {[
               {
+                icon: Sparkles,
                 title: { zh: "战略定位", en: "Strategic Positioning" },
-                desc: { zh: "商业模式与差异化赛道", en: "Business model & differentiated positioning" },
+                desc: { zh: "商业模式、差异化赛道与里程碑拆解，对齐真实市场需求。", en: "Business model, wedge, and milestones anchored to live market pull." },
               },
               {
+                icon: Building2,
                 title: { zh: "资源对接", en: "Resource Matching" },
-                desc: { zh: "全球订单、投资与产业专家", en: "Global orders, capital, domain experts" },
+                desc: { zh: "全球订单、标杆客户 PoC、产业专家与合规背书。", en: "Global orders, lighthouse PoCs, domain experts, and compliance scaffolding." },
               },
               {
-                title: { zh: "团队组建", en: "Team Building" },
-                desc: { zh: "OPC 液态协作与全球化架构", en: "OPC liquid teams & global collaboration" },
+                icon: Network,
+                title: { zh: "液态团队", en: "Liquid Teams" },
+                desc: { zh: "OPC 协作单元按需嵌入研发、增长与交付。", en: "OPC units embed on-demand across R&D, growth, and delivery." },
               },
               {
+                icon: Rocket,
                 title: { zh: "资本加速", en: "Capital Acceleration" },
-                desc: { zh: "早期投资、RWA 与战略投资人", en: "Seed, RWA financing, strategic investors" },
+                desc: { zh: "早期投资、战略 LP 与 RWA 等结构化融资路径。", en: "Seed rounds, strategic LPs, and structured paths including RWA where relevant." },
               },
             ].map((item, i) => (
-              <Reveal key={i} delay={i * 0.08}>
-                <div className="card-premium h-full">
-                  <h3 className="text-base font-medium text-foreground mb-2">{tx(item.title, language)}</h3>
-                  <p className="text-sm text-muted-foreground">{tx(item.desc, language)}</p>
+              <Reveal key={i} delay={i * 0.07}>
+                <div className="uni-aurora-card h-full flex gap-4">
+                  <div className="w-10 h-10 rounded-lg bg-gold/15 border border-gold/25 flex items-center justify-center shrink-0">
+                    <item.icon className="w-5 h-5 text-gold" strokeWidth={1.35} />
+                  </div>
+                  <div>
+                    <h3 className="text-base font-semibold text-white mb-1.5" style={{ fontFamily: "var(--font-heading)" }}>
+                      {tx(item.title, language)}
+                    </h3>
+                    <p className="text-sm text-white/60 leading-relaxed">{tx(item.desc, language)}</p>
+                  </div>
                 </div>
               </Reveal>
             ))}
@@ -978,38 +1086,40 @@ export default function Uni() {
       </section>
 
       {/* ═══ CTA ═══ */}
-      <section className="section-padding section-deep-blue relative overflow-hidden">
-        <div className="absolute inset-0 pattern-overlay pointer-events-none opacity-30" />
+      <section className="section-padding uni-cta-panel relative overflow-hidden">
+        <div className="absolute inset-0 pattern-overlay pointer-events-none opacity-25" aria-hidden />
         <div className="container relative z-10 max-w-3xl text-center">
           <Reveal>
-            <Building2 className="w-14 h-14 text-gold/60 mx-auto mb-6" />
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gold/10 border border-gold/25 mx-auto mb-8 shadow-[0_0_40px_oklch(0.62_0.1_75/0.15)]">
+              <Building2 className="w-8 h-8 text-gold" strokeWidth={1.25} />
+            </div>
           </Reveal>
           <Reveal delay={0.1}>
-            <h2 className="text-white mb-4">
-              {tx({ zh: "开启 AI 人才培养合作", en: "Start AI Talent Partnership" }, language)}
+            <h2 className="text-white mb-4 text-balance">
+              {tx({ zh: "高校方案与创投管线，一并洽谈", en: "Institutional Programs & Venture Pipeline—One Conversation" }, language)}
             </h2>
           </Reveal>
           <Reveal delay={0.2}>
-            <p className="text-white/70 mb-8">
+            <p className="text-white/65 mb-10 text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
               {tx({
-                zh: "索取完整方案、学分矩阵与示范大纲：hi@opcglobal.ai",
-                en: "Request the full blueprint, credit matrix, and sample syllabi: hi@opcglobal.ai",
+                zh: "索取完整人才培养方案、学分矩阵、示范大纲与独角兽加速清单：hi@opcglobal.ai",
+                en: "Request the talent blueprint, credit matrix, sample syllabi, and venture acceleration overview: hi@opcglobal.ai",
               }, language)}
             </p>
           </Reveal>
           <Reveal delay={0.3}>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="mailto:hi@opcglobal.ai">
-                <button className="btn-gold">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-stretch sm:items-center">
+              <a href="mailto:hi@opcglobal.ai" className="inline-flex justify-center">
+                <button type="button" className="btn-gold min-h-[48px] px-10">
                   <span className="flex items-center gap-2">
-                    {tx({ zh: "预约院长洽谈", en: "Schedule Dean Consultation" }, language)}
+                    {tx({ zh: "预约 OPC UNI 会谈", en: "Schedule OPC UNI Session" }, language)}
                     <ArrowRight className="w-4 h-4" />
                   </span>
                 </button>
               </a>
-              <a href="#standard-courses">
-                <button className="btn-outline-gold">
-                  <span>{tx({ zh: "核心课程简介", en: "Core Course Catalog" }, language)}</span>
+              <a href="#standard-courses" className="inline-flex justify-center">
+                <button type="button" className="btn-outline-gold border-white/35 text-white hover:bg-white/10 min-h-[48px] px-8">
+                  {tx({ zh: "核心课程简介", en: "Core Course Catalog" }, language)}
                 </button>
               </a>
             </div>
