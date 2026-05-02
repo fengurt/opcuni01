@@ -1,0 +1,24 @@
+name = "opcglobal01"
+compatibility_date = "2025-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Pages configuration
+pages_build_output_dir = "dist/public"
+
+# Environment variables (set in Cloudflare dashboard)
+[vars]
+NODE_ENV = "production"
+
+# Bindings - NOTE: ASSETS is reserved in Pages projects
+[[d1_databases]]
+binding = "DB"
+database_name = "opcglobal"
+database_id = "YOUR_D1_DATABASE_ID"
+
+[[hyperdrive]]
+binding = "HYPERDRIVE"
+id = "YOUR_HYPERDRIVE_ID"
+
+[[r2_buckets]]
+binding = "ASSETS_BUCKET"
+bucket_name = "opcglobal-assets"
