@@ -1,32 +1,60 @@
+import "dotenv/config";
 import express from "express";
 import { createServer } from "http";
-import path from "path";
-import { fileURLToPath } from "url";
+import net from "net";
+import { createExpressMiddleware } from "@trpc/server/adapters/express";
+import { registerLogtoRoutes } from "./_core/logto";
+import { appRouter } from "./routers";
+import { createContext } from "./_core/context";
+import { serveStatic, setupVite } from "./_core/vite";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+function isPortAvailable(port: number): Promise<boolean> {
+  return new Promise(resolve => {
+    const server = net.createServer();
+    server.listen(port, () => {
+      server.close(() => resolve(true));
+    });
+    server.on("error", () => resolve(false));
+  });
+}
+
+async function findAvailablePort(startPort: number = 3000): Promise<number> {
+  for (let port = startPort; port < startPort + 20; port++) {
+    if (await isPortAvailable(port)) return port;
+  }
+  throw new Error(`No available port found starting from ${startPort}`);
+}
 
 async function startServer() {
   const app = express();
   const server = createServer(app);
+  app.set("trust proxy", 1);
+  app.use(express.json({ limit: "50mb" }));
+  app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
-  // Serve static files from dist/public in production
-  const staticPath =
-    process.env.NODE_ENV === "production"
-      ? path.resolve(__dirname, "public")
-      : path.resolve(__dirname, "..", "dist", "public");
+  registerLogtoRoutes(app);
+  app.use("/api/trpc", createExpressMiddleware({ router: appRouter, createContext }));
 
-  app.use(express.static(staticPath));
+  if (process.env.NODE_ENV === "development") {
+    await setupVite(app, server);
+  } else {
+    const { default: path } = await import("path");
+    const { fileURLToPath } = await import("url");
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = path.dirname(__filename);
+    const staticPath = path.resolve(__dirname, "..", "dist", "public");
+    app.use(express.static(staticPath));
+    app.get("*", (_req, res) => {
+      res.sendFile(path.join(staticPath, "index.html"));
+    });
+  }
 
-  // Handle client-side routing - serve index.html for all routes
-  app.get("*", (_req, res) => {
-    res.sendFile(path.join(staticPath, "index.html"));
-  });
-
-  const port = process.env.PORT || 3000;
-
+  const port = Number(process.env.PORT) || (await findAvailablePort());
   server.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}/`);
+    console.log(`[OPC UNI] Server ready → http://localhost:${port}/`);
+    if (process.env.NODE_ENV !== "production") {
+      console.log(`[OPC UNI] Dev mode — Vite HMR active`);
+    }
   });
 }
 
