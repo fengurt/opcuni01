@@ -67,7 +67,7 @@ export default function Uni() {
   const phasePrac = { zh: "实战阶段", en: "Capstone & Practice" };
 
   const quickNav = [
-    { href: "#offerings", zh: "方案概览", en: "Overview" },
+    { href: "#pyramid", zh: "人才金字塔", en: "Talent Pyramid" },
     { href: "#three-pillars", zh: "三大支柱", en: "Pillars" },
     { href: "#four-tracks", zh: "培养体系", en: "Programs" },
     { href: "#unicorn", zh: "独角兽", en: "Ventures" },
@@ -282,6 +282,131 @@ export default function Uni() {
         </div>
       </section>
 
+      {/* ═══ TALENT PYRAMID ═══ */}
+      <section id="pyramid" className="section-padding-sm uni-pyramid-bg border-b border-border/20 scroll-mt-32">
+        <div className="container max-w-6xl">
+          <SectionHeading
+            label={tx({ zh: "人才金字塔", en: "Global AI Talent Pyramid" }, language)}
+            title={tx({ zh: "四层人才结构与全球供需缺口", en: "Four-Tier Talent Structure & Global Supply-Demand Gap" }, language)}
+            subtitle={tx({
+              zh: "依据《UNI AI 人才培养方案》§2 — 全球 AI 核心人才缺口达 140 万，较 2023 年增长 67%；大模型架构师供需比高达 1:9。",
+              en: "From UNI Blueprint §2 — global AI talent gap reaches 1.4 M, up 67% vs 2023; LLM architects face a 1:9 supply-demand ratio.",
+            }, language)}
+          />
+          {/* Layer breakdown cards */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            {[
+              {
+                pct: "5%",
+                layer: { zh: "顶层人才", en: "Top Tier" },
+                type: { zh: "大模型核心研发类", en: "Large Model Core R&D" },
+                demand: "12%",
+                gap: { zh: "28 万人", en: "280 K jobs" },
+                ratio: "1 : 9",
+                color: "from-gold/30 to-gold/5",
+              },
+              {
+                pct: "15%",
+                layer: { zh: "上层人才", en: "Upper Tier" },
+                type: { zh: "AI 工程落地类", en: "AI Engineering & Deployment" },
+                demand: "40%",
+                gap: { zh: "56 万人", en: "560 K jobs" },
+                ratio: "1 : 7",
+                color: "from-blue-400/25 to-blue-400/5",
+              },
+              {
+                pct: "40%",
+                layer: { zh: "中层人才", en: "Mid Tier" },
+                type: { zh: "AI 行业应用类", en: "AI Industry Applications" },
+                demand: "33%",
+                gap: { zh: "42 万人", en: "420 K jobs" },
+                ratio: "1 : 5",
+                color: "from-emerald-400/25 to-emerald-400/5",
+              },
+              {
+                pct: "40%",
+                layer: { zh: "基础层人才", en: "Foundation Tier" },
+                type: { zh: "AI 支撑与治理类", en: "AI Governance & Enablement" },
+                demand: "15%",
+                gap: { zh: "14 万人", en: "140 K jobs" },
+                ratio: "1 : 3",
+                color: "from-slate-400/20 to-slate-400/5",
+              },
+            ].map((tier, i) => (
+              <Reveal key={i} delay={i * 0.1}>
+                <div className={`relative rounded-xl p-4 h-full bg-gradient-to-br ${tier.color} border border-border/60 overflow-hidden`}>
+                  <div className="absolute top-3 right-3 text-5xl font-light text-foreground/6 select-none" style={{ fontFamily: "var(--font-heading)" }}>{tier.pct}</div>
+                  <div className="relative z-10">
+                    <p className="text-[10px] font-bold tracking-[0.18em] uppercase text-muted-foreground mb-1">{tier.layer.en}</p>
+                    <h3 className="text-base font-semibold text-foreground mb-3" style={{ fontFamily: "var(--font-heading)" }}>{tx(tier.type, language)}</h3>
+                    <div className="space-y-1.5">
+                      <div className="flex justify-between items-center">
+                        <span className="text-[10px] text-muted-foreground">{tx({ zh: "全球需求占比", en: "Global demand share" }, language)}</span>
+                        <span className="text-sm font-semibold text-foreground">{tier.demand}</span>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="text-[10px] text-muted-foreground">{tx({ zh: "人才缺口", en: "Talent gap" }, language)}</span>
+                        <span className="text-sm font-semibold text-foreground">{tier.gap.zh}</span>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="text-[10px] text-muted-foreground">{tx({ zh: "供需比", en: "Supply-demand" }, language)}</span>
+                        <span className="text-sm font-bold text-gold">{tier.ratio}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+          {/* Global credit system reference table */}
+          <div className="rounded-xl border border-border/60 bg-background overflow-hidden shadow-[0_8px_32px_oklch(0.15_0.03_250/0.04)]">
+            <div className="bg-muted/40 px-5 py-3 border-b border-border/50">
+              <p className="text-xs font-semibold tracking-[0.16em] uppercase text-muted-foreground">
+                {tx({ zh: "学分换算参考 · 全球三大教育体系", en: "Credit Conversion Reference · Three Global Systems" }, language)}
+              </p>
+            </div>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead className="bg-gradient-to-r from-muted/60 to-muted/30">
+                  <tr className="text-left border-b border-border/50">
+                    <th className="p-3.5 font-semibold text-foreground">{tx({ zh: "课程模块", en: "Module Type" }, language)}</th>
+                    <th className="p-3.5 font-semibold text-foreground whitespace-nowrap">{tx({ zh: "中国学分", en: "CN Credits" }, language)}</th>
+                    <th className="p-3.5 font-semibold text-foreground whitespace-nowrap">ECTS</th>
+                    <th className="p-3.5 font-semibold text-foreground whitespace-nowrap">{tx({ zh: "美英学分", en: "US/UK Credits" }, language)}</th>
+                    <th className="p-3.5 font-semibold text-foreground whitespace-nowrap">{tx({ zh: "学习时数", en: "Study Hours" }, language)}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    { m: { zh: "基础阶段课程（每门）", en: "Foundation courses (each)" }, cn: "2", ects: "3", us: "1", h: "75–90" },
+                    { m: { zh: "进阶阶段课程（每门）", en: "Advanced courses (each)" }, cn: "3", ects: "4.5", us: "1.5", h: "112–135" },
+                    { m: { zh: "实战阶段课程（每门）", en: "Capstone courses (each)" }, cn: "4", ects: "6", us: "2", h: "150–180" },
+                    { m: { zh: "实训项目", en: "Practicum project" }, cn: "6", ects: "9", us: "3", h: "225–270" },
+                    { m: { zh: "毕业总学分（参考值）", en: "Reference graduation total" }, cn: "48", ects: "72", us: "24", h: "1800–2160" },
+                  ].map((row, i) => (
+                    <tr key={i} className="border-b border-border/30 last:border-0">
+                      <td className={`p-3.5 font-medium ${i === 4 ? "text-foreground" : "text-muted-foreground"}`}>{tx(row.m, language)}</td>
+                      <td className={`p-3.5 ${i === 4 ? "text-foreground font-semibold" : "text-muted-foreground"}`}>{row.cn}</td>
+                      <td className={`p-3.5 ${i === 4 ? "text-foreground font-semibold" : "text-muted-foreground"}`}>{row.ects}</td>
+                      <td className={`p-3.5 ${i === 4 ? "text-foreground font-semibold" : "text-muted-foreground"}`}>{row.us}</td>
+                      <td className={`p-3.5 ${i === 4 ? "text-foreground font-semibold" : "text-muted-foreground"}`}>{row.h}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div className="px-5 py-3 bg-muted/20 border-t border-border/40">
+              <p className="text-xs text-muted-foreground">
+                {tx({
+                  zh: "换算系数：1 中国学分 ≈ 1.5 ECTS ≈ 0.5 美英学分 · 核心技能保质期 11 个月 · 课程每季度迭代",
+                  en: "Conversion: 1 CN ≈ 1.5 ECTS ≈ 0.5 US · Core skill shelf-life: 11 months · Curriculum refreshes quarterly",
+                }, language)}
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ═══ FOUR TRACKS OVERVIEW ═══ */}
       <section id="four-tracks" className="section-padding bg-background scroll-mt-32">
         <div className="container max-w-5xl">
@@ -404,23 +529,23 @@ export default function Uni() {
                 { phase: phasePrac, name: { zh: "大模型研发综合实训", en: "Capstone: Large Model R&D" }, cn: "6", ects: "9", us: "3" },
               ]}
             />
-            <p className="text-white/50 text-xs mt-3">{tx({ zh: "合计：中国学分 40 · ECTS 60 · 美英学分 20", en: "Totals: 40 CN · 60 ECTS · 20 US credits" }, language)}</p>
+            <p className="text-white/50 text-xs mt-3">{tx({ zh: "合计：中国学分 40 · 60 ECTS · 20 美英学分", en: "Totals: 40 CN · 60 ECTS · 20 US credits" }, language)}</p>
           </Reveal>
           <Reveal delay={0.15}>
             <h4 className="text-white font-semibold mt-10 mb-4">{tx({ zh: "理实一体化实训", en: "Integrated Practice Labs" }, language)}</h4>
             <div className="space-y-3 text-sm text-white/75">
               {[
                 {
-                  zh: "7B 参数大模型从零训练 — NVIDIA A100×8、Megatron-LM、DeepSpeed；验收：Perplexity≤2.5，MMLU≥60%。",
-                  en: "7B model from scratch — A100×8, Megatron-LM, DeepSpeed; deliverables: weights, logs, technical report.",
+                  zh: "7B 参数大模型从零训练 — NVIDIA A100×8 集群、Megatron-LM、DeepSpeed；验收：Perplexity≤2.5，MMLU≥60%。",
+                  en: "7B model from scratch — NVIDIA A100×8, Megatron-LM, DeepSpeed; Acceptance: Perplexity ≤2.5, MMLU ≥60%.",
                 },
                 {
-                  zh: "多模态融合模型开发 — CLIP/Flava、LAION；图文检索 Recall@1≥70%。",
-                  en: "Multimodal fusion — CLIP/Flava, LAION; Recall@1≥70%; demo + ablation study.",
+                  zh: "多模态融合模型开发 — CLIP/Flava、LAION 数据集；图文检索 Recall@1≥70%。",
+                  en: "Multimodal fusion — CLIP/Flava, LAION dataset; Image-text retrieval Recall@1 ≥70%.",
                 },
                 {
-                  zh: "MoE 专家模型优化 — Mixtral / Switch Transformer；效率提升≥30%，参数量≥56B。",
-                  en: "MoE optimization — Mixtral/Switch; ≥30% efficiency, ≥56B params; performance report.",
+                  zh: "MoE 专家模型优化 — Mixtral / Switch Transformer；训练效率提升≥30%，参数量≥56B。",
+                  en: "MoE optimization — Mixtral/Switch Transformer; Training efficiency ≥30%, parameter scale ≥56B.",
                 },
               ].map((line, i) => (
                 <div key={i} className="flex gap-2 glass-card-dark p-4 rounded-lg">
@@ -444,10 +569,10 @@ export default function Uni() {
                 </thead>
                 <tbody>
                   {[
-                    { r: { zh: "大模型算法工程师", en: "Large Model Algorithm Engineer" }, c: "80–150", e: "8–15", u: "180–350" },
-                    { r: { zh: "研究科学家", en: "Research Scientist" }, c: "120–300", e: "10–20", u: "250–500" },
-                    { r: { zh: "大模型架构师", en: "Large Model Architect" }, c: "150–500", e: "12–25", u: "300–700" },
-                    { r: { zh: "AI 实验室负责人", en: "AI Lab Lead" }, c: "200–800", e: "15–35", u: "400–1000" },
+                    { r: { zh: "大模型算法工程师", en: "Large Model Algorithm Engineer" }, c: "80–150", e: "8–15", u: "18–35" },
+                    { r: { zh: "研究科学家", en: "Research Scientist" }, c: "120–300", e: "10–20", u: "25–50" },
+                    { r: { zh: "大模型架构师", en: "Large Model Architect" }, c: "150–500", e: "12–25", u: "30–70" },
+                    { r: { zh: "AI 实验室负责人", en: "AI Lab Lead" }, c: "200–800", e: "15–35", u: "40–100" },
                   ].map((row, i) => (
                     <tr key={i} className="border-b border-white/5">
                       <td className="p-3">{tx(row.r, language)}</td>
@@ -493,7 +618,7 @@ export default function Uni() {
                 { phase: phaseBasic, name: { zh: "云原生技术栈", en: "Cloud-Native Stack" }, cn: "3", ects: "4.5", us: "1.5" },
                 { phase: phaseBasic, name: { zh: "模型服务化架构", en: "Model Serving Architecture" }, cn: "2", ects: "3", us: "1" },
                 { phase: phaseAdv, name: { zh: "向量数据库与检索增强", en: "Vector DB & RAG" }, cn: "3", ects: "4.5", us: "1.5" },
-                { phase: phaseAdv, name: { zh: "LLM 应用开发框架", en: "LLM Application Frameworks" }, cn: "4", ects: "6", us: "2" },
+                { phase: phaseAdv, name: { zh: "AI 应用开发框架", en: "AI Application Frameworks" }, cn: "4", ects: "6", us: "2" },
                 { phase: phaseAdv, name: { zh: "高并发推理系统设计", en: "High-Concurrency Inference" }, cn: "4", ects: "6", us: "2" },
                 { phase: phaseAdv, name: { zh: "AI 监控与可观测性", en: "AI Observability" }, cn: "3", ects: "4.5", us: "1.5" },
                 { phase: phasePrac, name: { zh: "Agent 智能体开发", en: "Agent Development" }, cn: "4", ects: "6", us: "2" },
@@ -502,23 +627,23 @@ export default function Uni() {
                 { phase: phasePrac, name: { zh: "AI 工程化综合实训", en: "Capstone: AI Engineering" }, cn: "6", ects: "9", us: "3" },
               ]}
             />
-            <p className="text-muted-foreground text-xs mt-3">{tx({ zh: "合计：37 / 55.5 / 18.5", en: "Totals: 37 CN · 55.5 ECTS · 18.5 US" }, language)}</p>
+            <p className="text-muted-foreground text-xs mt-3">{tx({ zh: "合计：中国学分 37 · 55.5 ECTS · 18.5 美英学分", en: "Totals: 37 CN · 55.5 ECTS · 18.5 US" }, language)}</p>
           </Reveal>
           <Reveal delay={0.15}>
             <h4 className="font-semibold mt-10 mb-4">{tx({ zh: "理实一体化实训", en: "Integrated Practice Labs" }, language)}</h4>
             <div className="space-y-3 text-sm text-muted-foreground">
               {[
                 {
-                  zh: "企业级 RAG：LangChain、向量库、OpenAI API；准确率≥85%，响应≤2s。",
-                  en: "Enterprise RAG — LangChain, vector DBs, APIs; ≥85% accuracy, ≤2s latency.",
+                  zh: "企业级 RAG 系统构建 — LangChain、Pinecone/Weaviate、OpenAI API；问答准确率≥85%，响应时间≤2s。",
+                  en: "Enterprise RAG system — LangChain, Pinecone/Weaviate, OpenAI API; Q&A accuracy ≥85%, response ≤2s.",
                 },
                 {
-                  zh: "高并发推理：vLLM/TGI、K8s、Prometheus；QPS≥1000，可用性≥99.9%。",
-                  en: "High-QPS inference — vLLM/TGI, K8s, Prometheus; QPS≥1000, ≥99.9% uptime.",
+                  zh: "高并发推理服务 — vLLM/TGI、Kubernetes、Prometheus；QPS≥1000，可用性≥99.9%。",
+                  en: "High-QPS inference — vLLM/TGI, Kubernetes, Prometheus; QPS ≥1000, uptime ≥99.9%.",
                 },
                 {
-                  zh: "多 Agent 协作：CrewAI、LangGraph 等；任务完成率≥90%，人工干预≤10%。",
-                  en: "Multi-agent — CrewAI, LangGraph; ≥90% task success, ≤10% human intervention.",
+                  zh: "多 Agent 协作平台 — AutoGPT、CrewAI、LangGraph；任务完成率≥90%，人工干预率≤10%。",
+                  en: "Multi-agent platform — AutoGPT, CrewAI, LangGraph; task completion ≥90%, human intervention ≤10%.",
                 },
               ].map((line, i) => (
                 <div key={i} className="flex gap-2 card-premium p-4">
@@ -542,10 +667,10 @@ export default function Uni() {
                 </thead>
                 <tbody className="text-muted-foreground">
                   {[
-                    { r: { zh: "MLOps 工程师", en: "MLOps Engineer" }, c: "50–120", e: "6–12", u: "150–280" },
-                    { r: { zh: "推理优化工程师", en: "Inference Optimization Engineer" }, c: "60–150", e: "7–14", u: "180–320" },
-                    { r: { zh: "AI 基础设施工程师", en: "AI Infrastructure Engineer" }, c: "70–180", e: "8–16", u: "200–380" },
-                    { r: { zh: "LLM 应用架构师", en: "LLM Application Architect" }, c: "80–200", e: "9–18", u: "220–450" },
+                    { r: { zh: "MLOps 工程师", en: "MLOps Engineer" }, c: "50–120", e: "6–12", u: "15–28" },
+                    { r: { zh: "推理优化工程师", en: "Inference Optimization Engineer" }, c: "60–150", e: "7–14", u: "18–32" },
+                    { r: { zh: "AI 基础设施工程师", en: "AI Infrastructure Engineer" }, c: "70–180", e: "8–16", u: "20–38" },
+                    { r: { zh: "AI 应用架构师", en: "AI Application Architect" }, c: "80–200", e: "9–18", u: "22–45" },
                   ].map((row, i) => (
                     <tr key={i} className="border-b border-border/30">
                       <td className="p-3 text-foreground">{tx(row.r, language)}</td>
@@ -604,23 +729,23 @@ export default function Uni() {
                 ]}
               />
             </div>
-            <p className="text-white/50 text-xs mt-3">{tx({ zh: "合计：34 / 51 / 17", en: "Totals: 34 CN · 51 ECTS · 17 US" }, language)}</p>
+            <p className="text-white/50 text-xs mt-3">{tx({ zh: "合计：中国学分 34 · 51 ECTS · 17 美英学分", en: "Totals: 34 CN · 51 ECTS · 17 US credits" }, language)}</p>
           </Reveal>
           <Reveal delay={0.15}>
             <h4 className="text-white font-semibold mt-10 mb-4">{tx({ zh: "理实一体化实训", en: "Integrated Practice Labs" }, language)}</h4>
             <div className="space-y-3 text-sm text-white/75">
               {[
                 {
-                  zh: "智能客服：知识库与微调数据；解决率≥80%，人工转接≤20%。",
-                  en: "Intelligent customer service — KB & fine-tuning data; ≥80% resolution.",
+                  zh: "智能客服系统 — 企业知识库与微调数据；问题解决率≥80%，人工转接率≤20%。",
+                  en: "Intelligent customer service — enterprise KB & fine-tuning data; resolution ≥80%, transfer ≤20%.",
                 },
                 {
-                  zh: "工业质检：相机数据集、YOLO/Detr；准确率≥99%，漏检≤0.1%。",
-                  en: "Industrial QA — vision models; ≥99% accuracy, ≤0.1% miss rate.",
+                  zh: "工业质检 AI 系统 — 工业相机数据集、YOLO/Detr；检测准确率≥99%，漏检率≤0.1%。",
+                  en: "Industrial QA AI — industrial camera dataset, YOLO/Detr; accuracy ≥99%, miss rate ≤0.1%.",
                 },
                 {
-                  zh: "个性化推荐：协同过滤 + LLM；CTR↑≥20%，转化↑≥15%。",
-                  en: "Recommendation — CF + LLM; CTR +20%, conversion +15% targets.",
+                  zh: "个性化推荐系统 — 用户行为日志、协同过滤 + LLM；CTR 提升≥20%，转化率提升≥15%。",
+                  en: "Recommendation system — user behavior logs, CF + LLM; CTR +20%, conversion +15%.",
                 },
               ].map((line, i) => (
                 <div key={i} className="flex gap-2 glass-card-dark p-4 rounded-lg">
@@ -644,10 +769,10 @@ export default function Uni() {
                 </thead>
                 <tbody>
                   {[
-                    { r: { zh: "AI 产品经理", en: "AI Product Manager" }, c: "40–100", e: "5–10", u: "120–250" },
-                    { r: { zh: "行业解决方案专家", en: "Industry Solution Expert" }, c: "50–150", e: "6–13", u: "150–300" },
-                    { r: { zh: "AI 转型顾问", en: "AI Transformation Consultant" }, c: "60–180", e: "7–15", u: "180–380" },
-                    { r: { zh: "垂直领域 AI 专家", en: "Vertical AI Specialist" }, c: "70–200", e: "8–18", u: "200–420" },
+                    { r: { zh: "AI 产品经理", en: "AI Product Manager" }, c: "40–100", e: "5–10", u: "12–25" },
+                    { r: { zh: "行业解决方案专家", en: "Industry Solution Expert" }, c: "50–150", e: "6–13", u: "15–30" },
+                    { r: { zh: "AI 转型顾问", en: "AI Transformation Consultant" }, c: "60–180", e: "7–15", u: "18–38" },
+                    { r: { zh: "垂直领域 AI 专家", en: "Vertical AI Specialist" }, c: "70–200", e: "8–18", u: "20–42" },
                   ].map((row, i) => (
                     <tr key={i} className="border-b border-white/5">
                       <td className="p-3">{tx(row.r, language)}</td>
@@ -702,23 +827,23 @@ export default function Uni() {
                 { phase: phasePrac, name: { zh: "AI 治理综合实训", en: "Capstone: AI Governance" }, cn: "6", ects: "9", us: "3" },
               ]}
             />
-            <p className="text-muted-foreground text-xs mt-3">{tx({ zh: "合计：34 / 51 / 17", en: "Totals: 34 CN · 51 ECTS · 17 US" }, language)}</p>
+            <p className="text-muted-foreground text-xs mt-3">{tx({ zh: "合计：中国学分 34 · 51 ECTS · 17 美英学分", en: "Totals: 34 CN · 51 ECTS · 17 US credits" }, language)}</p>
           </Reveal>
           <Reveal delay={0.15}>
             <h4 className="font-semibold mt-10 mb-4">{tx({ zh: "理实一体化实训", en: "Integrated Practice Labs" }, language)}</h4>
             <div className="space-y-3 text-sm text-muted-foreground">
               {[
                 {
-                  zh: "AI 合规风险评估：EU AI Act 分类工具、风险矩阵；识别覆盖率≥95%。",
-                  en: "Compliance risk assessment — EU AI Act tooling; ≥95% coverage.",
+                  zh: "AI 合规风险评估 — EU AI Act 分类工具、风险矩阵；风险识别覆盖率≥95%。",
+                  en: "AI compliance risk assessment — EU AI Act tooling, risk matrix; risk identification coverage ≥95%.",
                 },
                 {
-                  zh: "算法偏见检测与修正：Fairlearn、AIF360；偏见指标降低≥50%，性能下降≤5%。",
-                  en: "Bias detection & mitigation — Fairlearn, AIF360; ≥50% bias reduction.",
+                  zh: "算法偏见检测与修正 — Fairlearn、AIF360 工具包；偏见指标降低≥50%，性能下降≤5%。",
+                  en: "Bias detection & mitigation — Fairlearn, AIF360 toolkit; bias metrics reduced ≥50%, performance drop ≤5%.",
                 },
                 {
-                  zh: "AI 红队演练：Prompt 注入与越狱测试；发现≥10 个漏洞，修复率≥80%。",
-                  en: "Red teaming — prompt injection & jailbreaks; ≥10 findings, ≥80% fixed.",
+                  zh: "AI 红队攻击演练 — Prompt Injection 数据集、越狱测试；发现≥10 个安全漏洞，修复率≥80%。",
+                  en: "AI red team exercise — prompt injection dataset, jailbreak testing; ≥10 findings, fix rate ≥80%.",
                 },
               ].map((line, i) => (
                 <div key={i} className="flex gap-2 card-premium p-4">
@@ -742,10 +867,10 @@ export default function Uni() {
                 </thead>
                 <tbody className="text-muted-foreground">
                   {[
-                    { r: { zh: "AI 合规专员", en: "AI Compliance Specialist" }, c: "30–80", e: "4–8", u: "100–200" },
-                    { r: { zh: "AI 伦理专家", en: "AI Ethics Specialist" }, c: "40–100", e: "5–10", u: "120–250" },
-                    { r: { zh: "AI 审计师", en: "AI Auditor" }, c: "50–120", e: "6–12", u: "150–280" },
-                    { r: { zh: "首席 AI 治理官", en: "Chief AI Governance Officer" }, c: "80–200", e: "8–16", u: "200–450" },
+                    { r: { zh: "AI 合规专员", en: "AI Compliance Specialist" }, c: "30–80", e: "4–8", u: "10–20" },
+                    { r: { zh: "AI 伦理专家", en: "AI Ethics Specialist" }, c: "40–100", e: "5–10", u: "12–25" },
+                    { r: { zh: "AI 审计师", en: "AI Auditor" }, c: "50–120", e: "6–12", u: "15–28" },
+                    { r: { zh: "首席 AI 治理官", en: "Chief AI Governance Officer" }, c: "80–200", e: "8–16", u: "20–45" },
                   ].map((row, i) => (
                     <tr key={i} className="border-b border-border/30">
                       <td className="p-3 text-foreground">{tx(row.r, language)}</td>
