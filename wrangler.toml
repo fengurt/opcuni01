@@ -1,18 +1,19 @@
-name = "opcglobal01"
+name = "opcuni01"
 compatibility_date = "2025-01-01"
 compatibility_flags = ["nodejs_compat"]
 
 # Pages configuration
 pages_build_output_dir = "dist/public"
 
-# Environment variables (set in Cloudflare dashboard)
+# Environment variables (set in Cloudflare dashboard or .dev.vars for local)
 [vars]
 NODE_ENV = "production"
+VITE_APP_NAME = "OPC%20UNI"
 
-# Bindings - NOTE: ASSETS is reserved in Pages projects
+# Bindings — NOTE: ASSETS is reserved in Pages; use a different binding name
 [[d1_databases]]
 binding = "DB"
-database_name = "opcglobal"
+database_name = "opcuni"
 database_id = "YOUR_D1_DATABASE_ID"
 
 [[hyperdrive]]
@@ -21,4 +22,4 @@ id = "YOUR_HYPERDRIVE_ID"
 
 [[r2_buckets]]
 binding = "ASSETS_BUCKET"
-bucket_name = "opcglobal-assets"
+bucket_name = "opcuni-assets"
