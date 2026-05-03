@@ -769,6 +769,11 @@
     background: radial-gradient(ellipse 80% 60% at 50% 120%, oklch(0.62 0.14 75 / 0.2), transparent 55%);
     pointer-events: none;
   }
+
+  /* ── Talent Pyramid ── */
+  .uni-pyramid-bg {
+    background: linear-gradient(180deg, oklch(0.985 0.005 250), oklch(0.975 0.006 250));
+  }
 }
 
 /* ═══════════════════════════════════════════
